@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include ('./partials/head.ejs') %>
+<body>
+  <%- include ('./partials/nav.ejs') %>
+  <form id="post-form" method='post' action="/add-cafedra">
+    <div class="form-info">
+      <label>Название кафедры
+        <input type="text" name="title">
+      </label>
+      <label>Декан
+        <input type="text" name="dekan">
+      </label>
+      <label>Направление
+        <input type="text" name="direction">
+      </label>
+    </div>
+    <div class="form-text">
+      <label>Описание кафедры
+        <textarea name="text"></textarea>
+      </label>
+    </div>
+    <div class="form-button">
+      <input type="submit" value="Подтвердить">
+    </div>
+  </form>
+</body>
+</html>

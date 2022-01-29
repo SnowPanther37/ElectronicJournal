@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <%- include ('./partials/head.ejs') %>
+<body>
+  <%- include('./partials/nav.ejs') %>
+  <article class="post"> 
+    <div class="info">
+      <span><%= cafedra.createdAt.toLocaleDateString() || 'No date' %></span>
+      <span>Декан: <%= cafedra.dekan %></span>
+    </div>
+    <div>
+      <span>Направление: <%= cafedra.direction %></span>
+    </div>
+    <h1><%= cafedra.title %></h1>
+    <p>
+      <%= cafedra.text %>
+    </p>
+    <a href="/edit/<%= cafedra.id %>" class="btn-edit">
+      <i class="fas fa-edit"></i>
+    </a>
+    <button class="btn-delete" data-id="<%= cafedra.id %>">
+      <i class="fas fa-trash-alt" data-id="<%= cafedra.id %>"></i>
+    </button>
+  </article>
+  <script>
+    document.addEventListener('click', (e) => {
+      const id = e.target?.dataset?.id || null;
+      if (id) {
+        fetch(`/cafedras/${id}`, {
+          method: 'DELETE', 
+        }).then(() => {
+          window.location.href = '/cafedras';
+        });
+      }
+    });
+  </script>
+</body>
+</html>
