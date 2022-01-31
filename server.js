@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const res = require('express/lib/response');
 const cafedraRoutes = require('./routes/cafedra-routes');
+const cafedraApiRoutes = require('./routes/api-cafedra-routes');
 const contactRoutes = require('./routes/contact-routes');
 const createPath = require('./helpers/create-path');
 const app = express();
@@ -40,6 +41,7 @@ app.get('/about-us', (req, res) => {
 })
 
 app.use(cafedraRoutes);
+app.use(cafedraApiRoutes);
 app.use(contactRoutes);
 
 app.use((req, res) => {
