@@ -17,12 +17,6 @@ const app = express();
 
 app.set('view engine', 'ejs');
 
-<<<<<<< HEAD
-const PORT = 3000;
-const db = 'not';
-
-=======
->>>>>>> Popravki
 mongoose
     .connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then((res) => console.log(successMsg('Connected to DataBase')))
