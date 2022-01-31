@@ -4,7 +4,6 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const methodOverride = require('method-override');
-const res = require('express/lib/response');
 const cafedraRoutes = require('./routes/cafedra-routes');
 const cafedraApiRoutes = require('./routes/api-cafedra-routes');
 const contactRoutes = require('./routes/contact-routes');
