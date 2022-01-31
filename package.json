@@ -9,7 +9,6 @@
   "author": "Evgeny Somov",
   "license": "ISC",
   "dependencies": {
-    "chalk": "^4.1.1",
     "dotenv": "^15.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.2",
