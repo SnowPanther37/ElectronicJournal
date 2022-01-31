@@ -12,7 +12,7 @@ const app = express();
 app.set('view engine', 'ejs');
 
 const PORT = 3000;
-const db = 'mongodb+srv://SnowPanther37:Stalker14545@cluster0.yneog.mongodb.net/voodle?retryWrites=true&w=majority';
+const db = 'not';
 
 mongoose
     .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
