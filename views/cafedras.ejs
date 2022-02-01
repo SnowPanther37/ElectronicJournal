@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <%- include ('./partials/head.ejs') %>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <body>
   <nav>
     <ul>
@@ -19,7 +20,7 @@
             <h2>
               <a href="/cafedras/<%= id %>"><%= title %></a>
             </h2>
-            <p><%= text %></p>
+            <p class="p trim"><%= text %></p>
             <div class="info">
               <span><%= createdAt.toLocaleDateString() %></span>
               <span>Декан: <%= dekan %></span>
@@ -49,6 +50,14 @@
         });
       }
     });
+    $(document).ready(function () {
+    var size = 90,
+        newsContent = $('.trim'),
+        newsText = newsContent.text().trim(); // ◀
+    if(newsText.length > size) {
+      newsContent.text(newsText.slice(0, size) + ' ...');
+    }
+  });
   </script>
 </body>
 </html>

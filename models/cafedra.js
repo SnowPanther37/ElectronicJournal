@@ -9,14 +9,17 @@ const cafedraSchema = new Schema({
     title: {
         type: String,
         required: true,
+        maxlength: 50,
     },
     dekan: {
         type: String,
         required: true,
+        maxlength: 50,
     },
     direction: {
         type: String,
         required: true,
+        maxlength: 20,
     }
 }, { timestamps: true });
 

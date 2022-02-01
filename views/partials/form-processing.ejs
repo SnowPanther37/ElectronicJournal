@@ -1,0 +1,22 @@
+<script>
+const textareaHeight = document.getElementById("texth");
+textareaHeight.addEventListener("input", (event) => {
+textareaHeight.style.height = 0;
+textareaHeight.style.height = textareaHeight.scrollHeight + "px";
+})
+const textInputCaf = document.getElementById("textNameCaf");
+textInputCaf.addEventListener("input", (event) => {
+textInputCaf.style.width =  0;
+textInputCaf.style.width = textInputCaf.scrollWidth + "px";
+})
+const textInputDek = document.getElementById("textDekan");
+textInputDek.addEventListener("input", (event) => {
+textInputDek.style.width =  0;
+textInputDek.style.width = textInputDek.scrollWidth + "px";
+})
+const textInputDir = document.getElementById("textDirection");
+textInputDir.addEventListener("input", (event) => {
+textInputDir.style.width =  0;
+textInputDir.style.width = textInputDir.scrollWidth + "px";
+})
+</script>
