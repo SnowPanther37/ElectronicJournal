@@ -1,25 +1,28 @@
 const express = require('express');
+//const chalk = require('chalk');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+require('dotenv').config();
 const methodOverride = require('method-override');
-const res = require('express/lib/response');
 const cafedraRoutes = require('./routes/cafedra-routes');
+const cafedraApiRoutes = require('./routes/api-cafedra-routes');
 const contactRoutes = require('./routes/contact-routes');
 const createPath = require('./helpers/create-path');
+//const errorMsg = chalk.bgKeyword('white').redBright;
+//const successMsg = chalk.bgKeyword('green').white;
+
+
 const app = express();
 
 app.set('view engine', 'ejs');
 
-const PORT = 3000;
-const db = 'not';
-
 mongoose
-    .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+    .connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then((res) => console.log('Connected to DataBase'))
     .catch((error) => console.log(error));
 
-app.listen(PORT, (error) => {
-    error ? console.log(error) : console.log(`listening port ${PORT}`);
+app.listen(process.env.PORT, (error) => {
+    error ? console.log(error) : console.log(`listening port ${process.env.PORT}`);
 });
 
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
@@ -40,6 +43,7 @@ app.get('/about-us', (req, res) => {
 })
 
 app.use(cafedraRoutes);
+app.use(cafedraApiRoutes);
 app.use(contactRoutes);
 
 app.use((req, res) => {

@@ -4,20 +4,24 @@
 <body>
   <%- include ('./partials/nav.ejs') %>
   <form id="post-form" method='post' action="/edit/<%= cafedra.id %>?_method=PUT">
-    <div class="form-info">
+      <div>
       <label>Название кафедры
-        <input type="text" name="title" value="<%= cafedra.title %>">
+        <input id="textNameCaf" style="width: 300px;" placeholder="Введите название кафедры..." type="text" name="title" value="<%= cafedra.title %>">
       </label>
+    </div>
+    <div>
       <label>Декан
-        <input type="text" name="dekan" value="<%= cafedra.dekan %>">
+        <input id="textDekan" style="width: 300px;" placeholder="Введите ФИО декана..." type="text" name="dekan" value="<%= cafedra.dekan %>">
       </label>
+    </div>
+    <div>
       <label>Направление
-        <input type="text" name="direction" value="<%= cafedra.direction %>">
+        <input id="textDirection" style="width: 300px;" placeholder="Введите направление кафедры..." type="text" name="direction" value="<%= cafedra.direction %>">
       </label>
     </div>
     <div class="form-text">
       <label>Описание кафедры
-        <textarea name="text"><%= cafedra.text %></textarea>
+        <textarea id="texth" style="width: 1000px;" placeholder="Введите описание кафедры..." name="text"><%= cafedra.text %></textarea>
       </label>
     </div>
     <div class="form-button">
@@ -25,4 +29,5 @@
     </div>
   </form>
 </body>
+  <%- include ('./partials/form-processing.ejs') %>
 </html>

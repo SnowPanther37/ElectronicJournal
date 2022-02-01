@@ -33,10 +33,10 @@ const getEditCafedra = (req, res) => {
 }
 
 const editCafedra = (req, res) => {
-    const { title, dekan, text, redirect } = req.body;
+    const { title, dekan, text, direction, redirect } = req.body;
     const { id } = req.params;
     Cafedra
-        .findByIdAndUpdate(id, { title, dekan, text, redirect })
+        .findByIdAndUpdate(id, { title, dekan, text, direction, redirect })
         .then((result) => res.redirect(`/cafedras/${id}`))
         .catch((error) => handleError(res, error));
 }
