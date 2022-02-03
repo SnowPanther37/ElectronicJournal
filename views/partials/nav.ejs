@@ -3,5 +3,12 @@
       <li><a href="/">ИГХТУ</a></li>
       <li><a href="/cafedras">Кафедры</a></li>
       <li><a href="/contacts">Контакты</a></li>
+      <% if (user) { %>
+        <li>Ваш email: <%= user.email %></li>
+        <li><a href="/logout">Выйти</a></li>
+      <% } else { %>
+        <li><a href="/login">Войти</a></li>
+        <li><a href="/signup" class="btn">Зарегистрироваться</a></li>
+      <% } %>
     </ul>
   </nav>
