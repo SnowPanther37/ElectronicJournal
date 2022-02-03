@@ -1,4 +1,5 @@
 const express = require('express');
+const { requireAuth, checkUser } = require('../middleware/authMiddleware');
 const { 
     getCafedra,
     deleteCafedra,
@@ -11,12 +12,12 @@ const {
 
 const router = express.Router();
 
-router.get('/cafedras/:id', getCafedra);
+router.get('/cafedras/:id', requireAuth, getCafedra);
 router.delete('/cafedras/:id', deleteCafedra);
-router.get('/edit/:id', getEditCafedra);
-router.put('/edit/:id', editCafedra);
+router.get('/edit/:id', requireAuth, getEditCafedra);
+router.put('/edit/:id', requireAuth, editCafedra);
 router.get('/cafedras', getCafedras);
 router.post('/add-cafedra', getAddCafedra);
-router.get('/add-cafedra', AddCefedra);
+router.get('/add-cafedra', requireAuth, AddCefedra);
 
 module.exports = router;
