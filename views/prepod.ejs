@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <%- include ('./partials/head.ejs') %>
+<body>
+  <%- include('./partials/nav.ejs') %>
+  <article class="post"> 
+    <h1><%= prepod.name %></h1>
+    <p style="hyphens: auto;"><%= prepod.Day.Weekday[0] %> </p>
+    <p style="hyphens: auto;"><%= prepod.Para.NameObject[0] %>, группа №<%= prepod.Group.GroupNum[[0],[0]] %></p>
+    <p style="hyphens: auto;"><%= prepod.Para.NameObject[1] %>, группа №<%= prepod.Group.GroupNum[[0],[0]] %></p>
+    <p style="hyphens: auto;"><%= prepod.Para.NameObject[2] %>, группа №<%= prepod.Group.GroupNum[[0],[0]] %></p>
+    <p style="hyphens: auto;"><%= prepod.Para.NameObject[3] %>, группа №<%= prepod.Group.GroupNum[[0],[0]] %></p>
+
+  </article>
+  <article>
+      <p style="hyphens: auto;"><%= prepod.Day.Weekday[1] %> </p>
+      <p style="hyphens: auto;"><%= prepod.Para.NameObject[4] %>, группа №<%= prepod.Group.GroupNum[1] %></p>
+      <p style="hyphens: auto;"><%= prepod.Para.NameObject[5] %>, группа №<%= prepod.Group.GroupNum[2] %></p>
+      <p style="hyphens: auto;"><%= prepod.Para.NameObject[6] %>, группа №<%= prepod.Group.GroupNum[3] %></p>
+      <p style="hyphens: auto;"><%= prepod.Para.NameObject[7] %>, группа №<%= prepod.Group.GroupNum[[4],[0]] %></p>
+      <p style="hyphens: auto;"><%= prepod.Para.NameObject[0] %>, группа №<%= prepod.Group.GroupNum[[1],[0]] %></p>
+  </article>
+</body>
+</html>

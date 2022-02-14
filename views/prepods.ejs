@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include ('./partials/head.ejs') %>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<body>
+  <nav>
+    <ul>
+      <li><a href="/">ИГХТУ</a></li>
+      <li><a href="/cafedras">Кафедры</a></li>
+      <li><a href="/add-cafedra">Добавить кафедру</a></li>
+      <li><a href="/contacts">Контакты</a></li>
+    </ul>
+  </nav>
+  <h1>Преподаватели:</h1>
+  <ul>
+    <% if (prepods) { %>
+      <% prepods.forEach(({ id, name }) => { %>
+        <li>
+          <article>
+            <h2>
+              <a href="/prepods/<%= id %>"><%= name %></a>
+            </h2>
+          </article>
+        </li>
+      <% }) %>
+    <% } %>
+  </ul>
+</body>
+</html>

@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const methodOverride = require('method-override');
 const cafedraRoutes = require('./routes/cafedra-routes');
+const prepodRoutes = require('./routes/prepod-routes');
 const cafedraApiRoutes = require('./routes/api-cafedra-routes');
 const contactRoutes = require('./routes/contact-routes');
 const createPath = require('./helpers/create-path');
@@ -25,7 +26,7 @@ mongoose
     .catch((error) => console.log(error));
 
 app.listen(process.env.PORT, (error) => {
-    error ? console.log(error) : console.log(`listening port ${process.env.PORT}`);
+    error ? console.log(error) : console.log(`listening port ${process.env.PORT ?? 3000}`);
 });
 
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
@@ -49,6 +50,7 @@ app.use(authRoutes);
 app.use(cafedraRoutes);
 app.use(cafedraApiRoutes);
 app.use(contactRoutes);
+app.use(prepodRoutes);
 
 app.use((req, res) => {
     const title = 'Ошибка'

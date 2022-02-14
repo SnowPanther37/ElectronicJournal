@@ -13,7 +13,7 @@ const {
 const router = express.Router();
 
 router.get('/cafedras/:id', requireAuth, getCafedra);
-router.delete('/cafedras/:id', deleteCafedra);
+router.delete('/cafedras/:id', requireAuth, deleteCafedra);
 router.get('/edit/:id', requireAuth, getEditCafedra);
 router.put('/edit/:id', requireAuth, editCafedra);
 router.get('/cafedras', getCafedras);
