@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: voodle-deployment
+  labels:
+    app: voodle
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: voodle
+  template:
+    metadata:
+      labels:
+        app: voodle 
+    spec:
+      containers:
+      - name: voodleserver
+        image: snowpanther37/voodle:latest
+        ports:
+        - containerPort: 3000
+        
+        
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: voodle-service
+spec:
+  selector:
+    app: voodle 
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 3000
+    nodePort: 31110
