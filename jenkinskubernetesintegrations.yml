@@ -4,7 +4,6 @@ pipeline {
     dockerimagename = "snowpanther37/voodle"
     dockerImage = ""
   }
-}
 
 agent any
 
@@ -45,3 +44,4 @@ agent any
       }
     }
   }
+}
