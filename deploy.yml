@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: jhooq
+  name: vood
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: jhooq
+      app: vood
   template:
     metadata:
       labels:
-        app: jhooq
+        app: vood
     spec:
       containers:
-        - name: springboot
-          image: snowpanther37/vooddle
+        - name: voodboot
+          image: snowpanther37/voodle
           ports:
             - containerPort: 8080
           env:
@@ -24,11 +24,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: jhooq
+  name: vood
 spec:
   type: LoadBalancer
   ports:
-    - port: 80
+    - port: 3000
       targetPort: 8080
   selector:
-    app: jhooq
+    app: vood
