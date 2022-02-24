@@ -1,0 +1,4 @@
+container:
+  image: snowpanther37/voodle:latest
+
+replicaCount: 2

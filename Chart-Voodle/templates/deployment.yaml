@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Realese.Name }}-deployment
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Realese.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Realese.Name }}
+    spec:
+      containers:
+        - name: {{ .Realese.Name }}-web
+          image: {{ .Values.container.image }}
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PORT
+              value: "8080"
