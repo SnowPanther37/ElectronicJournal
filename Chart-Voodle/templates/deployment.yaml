@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Realese.Name }}-deployment
+  name: {{ .Release.Name }}-deployment
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Realese.Name }}
+      app: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ .Realese.Name }}
+        app: {{ .Release.Name }}
     spec:
       containers:
-        - name: {{ .Realese.Name }}-web
+        - name: {{ .Release.Name }}-web
           image: {{ .Values.container.image }}
           ports:
             - containerPort: 8080
