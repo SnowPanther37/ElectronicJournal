@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  nodeapp:
+    build:
+        context: .
+        dockerfile: Dockerfile.dev
+    ports:
+      - 3000:3000
+      - 9229:9229
+    volumes:
+      - .:/app
+    command: forever -w -c "node --inspect-brk=0.0.0.0:9229" server.js

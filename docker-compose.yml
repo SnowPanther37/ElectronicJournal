@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  nodeapp:
+    build: .
+    ports:
+      - 3000:3000
+      - 9229:9229
+    volumes:
+      - .:/app
+    command: node --inspect=0.0.0.0:9229 server.js
