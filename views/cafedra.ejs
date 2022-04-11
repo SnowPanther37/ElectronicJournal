@@ -1,27 +1,55 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <%- include ('./partials/head.ejs') %>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Кафедры</title>
+  <link rel="stylesheet" href="/css/cafedras.css" />
+  <link rel="stylesheet" href="/css/profile.css" />
+  <%- include ('./partials/bootstrap.ejs') %>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="/js/navbar.js"></script>
+  <style>
+        .navbar{
+          background-color: black !important;
+          display: flex;
+          flex-wrap: wrap;
+        }
+        .navButton {
+  border-color: white;
+}
+.navButton {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+  </style>
+  </head>
 <body>
-  <%- include('./partials/nav.ejs') %>
-  <article class="post"> 
+  <%- include ('./partials/navbar.ejs') %>
+  <article style="border-radius: 10px; margin-top: 100px;margin-left: 15px; margin-right: 15px; margin-bottom: 10px;" class="post"> 
     <div class="info">
-      <span><%= cafedra.createdAt.toLocaleDateString() || 'No date' %></span>
-      <span>Декан: <%= cafedra.dekan %></span>
+      <span style="color: white;"><%= cafedra.createdAt.toLocaleDateString() || 'No date' %></span>
+      <span style="color: white;">Декан: <%= cafedra.dekan %></span>
     </div>
     <div>
-      <span>Направление: <%= cafedra.direction %></span>
+      <span style="color: white;">Направление: <%= cafedra.direction %></span>
     </div>
-    <h1><%= cafedra.title %></h1>
-    <p style="hyphens: auto;">
+    <h1 style="color: white;"><%= cafedra.title %></h1>
+    <p style="color: white;" style="hyphens: auto;">
       <%= cafedra.text %>
     </p>
+    <%if(user.isAdmin){%>
     <a href="/edit/<%= cafedra.id %>" class="btn-edit">
       <i class="fas fa-edit"></i>
     </a>
     <button class="btn-delete" data-id="<%= cafedra.id %>">
       <i class="fas fa-trash-alt" data-id="<%= cafedra.id %>"></i>
     </button>
+    <%}%>
   </article>
   <script>
     document.addEventListener('click', (e) => {

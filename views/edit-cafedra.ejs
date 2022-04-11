@@ -1,32 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%- include ('./partials/head.ejs') %>
+  <head>
+    <title>Редактирование кафедры</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <link rel="stylesheet" href="/css/cafedras.css" />
+  <link rel="stylesheet" href="/css/profile.css" />
+  <%- include ('./partials/bootstrap.ejs') %>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="/js/navbar.js"></script>
+  <style>
+        .navbar{
+          background-color: black !important;
+          display: flex;
+          flex-wrap: wrap;
+        }
+        .navButton {
+  border-color: white;
+}
+.navButton {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+  </style>
+  </head>
 <body>
-  <%- include ('./partials/nav.ejs') %>
-  <form id="post-form" method='post' action="/edit/<%= cafedra.id %>?_method=PUT">
-      <div>
-      <label>Название кафедры
-        <input id="textNameCaf" style="width: 300px;" placeholder="Введите название кафедры..." type="text" name="title" value="<%= cafedra.title %>">
+  <%- include ('./partials/navbar.ejs') %>
+  <form style="margin-top: 60px;"id="post-form" method='post' action="/edit/<%= cafedra.id %>?_method=PUT">
+      <div class="form-group col-md-6">
+      <label style="color: white; margin-left: 20px; font-weight: bold; font-size: 20px;letter-spacing: 1px;">Название кафедры
+        <input id="text" class="form-control" style="width: 300px; border-radius: 10px;" placeholder="Введите название кафедры..." type="text" name="title" value="<%= cafedra.title %>">
       </label>
     </div>
-    <div>
-      <label>Декан
-        <input id="textDekan" style="width: 300px;" placeholder="Введите ФИО декана..." type="text" name="dekan" value="<%= cafedra.dekan %>">
+    <div class="form-group col-md-6">
+      <label style="color: white; margin-left: 20px; font-weight: bold; font-size: 20px;letter-spacing: 1px;">Декан
+        <input id="text" class="form-control" style="width: 300px; border-radius: 10px;" placeholder="Введите ФИО декана..." type="text" name="dekan" value="<%= cafedra.dekan %>">
       </label>
     </div>
-    <div>
-      <label>Направление
-        <input id="textDirection" style="width: 300px;" placeholder="Введите направление кафедры..." type="text" name="direction" value="<%= cafedra.direction %>">
+    <div class="form-group col-md-6">
+      <label style="color: white; margin-left: 20px; font-weight: bold; font-size: 20px;letter-spacing: 1px;">Направление
+        <input id="text" class="form-control" style="width: 300px; border-radius: 10px;" placeholder="Введите направление кафедры..." type="text" name="direction" value="<%= cafedra.direction %>">
       </label>
     </div>
-    <div class="form-text">
-      <label>Описание кафедры
-        <textarea id="texth" style="width: 1000px;" placeholder="Введите описание кафедры..." name="text"><%= cafedra.text %></textarea>
+    <div class="form-group col-md-6" class="form-text">
+      <label style="color: white; margin-left: 20px; font-weight: bold; font-size: 20px;letter-spacing: 1px;">Описание кафедры
+        <textarea id="texth" class="form-control" style="width: 1000px; border-radius: 10px;" placeholder="Введите описание кафедры..." name="text"><%= cafedra.text %></textarea>
       </label>
     </div>
-    <div class="form-button">
-      <input type="submit" value="Подтвердить">
-    </div>
+    <button type="submit" class="btn btn-primary mt-3" >Подтвердить</button>
   </form>
 </body>
   <%- include ('./partials/form-processing.ejs') %>

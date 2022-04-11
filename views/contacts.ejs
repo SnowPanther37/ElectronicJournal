@@ -1,17 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%- include ('./partials/head.ejs') %>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/profile.css" />
+  <%- include ('./partials/bootstrap.ejs') %>
+  <style>
+    .navbar{
+      background-color: black !important;
+    }
+    .navButton {
+border-color: white;
+}
+.navButton {
+background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+  </style>
+  </head>
 <body>
-  <%- include('./partials/nav.ejs') %>
-  <h1>Контакты:</h1>
-  <ul class="contacts">
-    <% if (contacts.length) { %>
-      <% contacts.forEach(({ link, name }) => { %>
-        <li>
-          <a href="<%= link %>"><%= name %></a>
-        </li>
-      <% }) %>
-    <% } %>
-  </ul>
+  <div class="headerContainer">
+    <%- include ('./partials/navbar.ejs') %>
+        <div class="container ">
+                <div style= "float: left;" class="col-lg-8 col-md-8 profileContainerContent">
+                  <h1 style="font-size: 52px; ">Контакты:</h1>
+                  <ul style="font-size: 30px;" class="contacts">
+                    <% if (contacts.length) { %>
+                      <% contacts.forEach(({ link, name }) => { %>
+                        <li>
+                          <a href="<%= link %>"><%= name %></a>
+                        </li>
+                      <% }) %>
+                    <% } %>
+                  </ul>
+                </div>
+        </div>
+</div>
+</body>
+
+
+
+ 
 </body>
 </html>

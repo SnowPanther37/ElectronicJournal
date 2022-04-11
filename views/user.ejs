@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/profile.css" />
+    <%- include ('./partials/bootstrap.ejs') %>
+    <style>
+        .navbar{
+          background-color: black !important;
+        }
+        .navButton {
+  border-color: white;
+}
+.navButton {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+      </style>
+</head>
+<body>
+    <div class="headerContainer">
+        <%- include ('./partials/navbar.ejs') %>
+            <div class="container ">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 profileContainerImage">
+                        <img src="https://www.kindpng.com/picc/m/78-785827_user-profile-avatar-login-account-male-user-icon.png"
+                             class="profileImage mt-4" alt="user" />
+                    </div>
+                    <div class="col-lg-8 col-md-8 profileContainerContent">
+                        <form method="post" action="/profile">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputFirstName">Имя</label>
+                                    <p><%=user.firstName%></p>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputLastName">Фамилия</label>
+                                 <p><%=user.lastName%></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputMiddleName">Отчество</label>
+                               <p><%if(user.middleName){%><%=user.middleName%><%}else{%>Отсутствует<%}%></p>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail">Email</label>
+                              <p><%=user.email%></p>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputAddress">Кафедра</label>
+                                <p><%if(user.middleName){%><%=user.adress%><%}else{%>Не указано<%}%></p>
+                            </div>
+                                <div class="form-group">
+                                    <% if (user.isPrepod) { %>
+                                    <label for="inputCity">Должность</label>
+                                   <p><%=user.city%></p>
+                                   <% } %>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputNumber">Номер телефона</label>
+                                    <p><%if(user.middleName){%><%=user.middleName%><%}else{%>Не указан<%}%></p>
+                                </div>
+                                <% if (user.isStudent) { %>
+                                <div class="form-group">
+                                    <label for="inputNumber">Курс</label>
+                                    <p><%if(user.middleName){%><%=user.course%><%}else{%>Не указано<%}%></p>
+                                  <div class="form-group">
+                                    <label for="inputNumber">Группа</label>
+                                    <p><%if(user.middleName){%><%=user.group%><%}else{%>Не указано<%}%></p>
+                                </div>
+                                </div>
+                                <% } %>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    </div>
+</body>
+</html>

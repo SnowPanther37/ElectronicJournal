@@ -1,95 +1,79 @@
-const User = require("../models/User");
-const jwt = require('jsonwebtoken');
-const createPath = require('../helpers/create-path');
-
-// handle errors
+const user = require("../models/user");
+const jwt = require("jsonwebtoken");
+const createPath = require("../helpers/create-path");
 const handleErrors = (err) => {
-  console.log(err.message, err.code);
-  let errors = { email: '', password: '' };
-
-  // incorrect email
-  if (err.message === 'incorrect email') {
-    errors.email = 'Этот email не зарегистрирован';
-  }
-
-  // incorrect password
-  if (err.message === 'incorrect password') {
-    errors.password = 'Неверный пароль';
-  }
-
-  // duplicate email error
+  let errorsList = { firstName: "", lastName: "", email: "", password: "" };
   if (err.code === 11000) {
-    errors.email = 'Этот email уже был зарегистрирован';
-    return errors;
+    errorsList.email = "Этот email уже зарегистрирован";
+    return errorsList;
   }
-
-  // validation errors
-  if (err.message.includes('user validation failed')) {
-    // console.log(err);
-    Object.values(err.errors).forEach(({ properties }) => {
-      // console.log(val);
-      // console.log(properties);
-      errors[properties.path] = properties.message;
+  if (err.message === "Incorrect Email") {
+    errorsList.email = "Этот email не зарегистрирован";
+  }
+  if (err.message === "Email Not Provided") {
+    errorsList.email = "Пожалуйста, введите email";
+  }
+  if (err.message === "Password Not Provided") {
+    errorsList.password = "Пожалуйста, введите пароль";
+  }
+  if (err.message === "Incorrect Password") {
+    errorsList.password = "Неверно введен пароль";
+  }
+  if (err.message.includes("account_information")) {
+    Object.values(err.errors).map((error) => {
+      errorsList[error.properties.path] = error.properties.message;
     });
   }
-
-  return errors;
-}
-
-// create json web token
-const maxAge = 3 * 24 * 60 * 60;
+  return errorsList;
+};
 const createToken = (id) => {
-  return jwt.sign({ id }, 'voodle', {
-    expiresIn: maxAge
+  return jwt.sign({ id }, process.env.HEADER, {
+    expiresIn: 3 * 24 * 60 * 60,
   });
 };
-
-// controller actions
-module.exports.signup_get = (req, res) => {
-  const title = 'Регистрация';
-  //res.render('signup');
-  res.render(createPath('signup'), {title})
-}
-
-module.exports.login_get = (req, res) => {
-  const title = 'Авторизация';
-  //res.render('login');
-  res.render(createPath('login'), {title})
-}
-
-module.exports.signup_post = async (req, res) => {
-  const { email, password } = req.body;
-
+signup_get = (req, res) => {
+  res.render(createPath('signup'));
+};
+login_get = (req, res) => {
+  res.render(createPath('login'));
+};
+signup_post = async (req, res) => {
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
+  const email = req.body.email;
+  const password = req.body.password;
+  const isStudent = req.body.isStudent;
   try {
-    const user = await User.create({ email, password });
-    const token = createToken(user._id);
-    res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-    res.status(201).json({ user: user._id });
-  }
-  catch(err) {
+    const userData = await user.create({
+      firstName,
+      lastName,
+      email,
+      password,
+      isStudent,
+    });
+    const token = createToken(userData._id);
+    res.cookie("jwt", token, { secure: true, maxAge: 3 * 24 * 60 * 60 * 1000 });
+    res.status(201).json({ userData: userData._id });
+  } catch (err) {
     const errors = handleErrors(err);
     res.status(400).json({ errors });
   }
- 
-}
-
-module.exports.login_post = async (req, res) => {
-  const { email, password } = req.body;
-
+};
+login_post = async (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
   try {
-    const user = await User.login(email, password);
-    const token = createToken(user._id);
-    res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-    res.status(200).json({ user: user._id });
-  } 
-  catch (err) {
+    const userData = await user.login(email, password);
+    const token = createToken(userData._id);
+    res.cookie("jwt", token, { secure: true, maxAge: 3 * 24 * 60 * 60 * 1000 });
+    res.status(200).json({ userData: userData._id });
+  } catch (err) {
     const errors = handleErrors(err);
     res.status(400).json({ errors });
   }
-
-}
-
-module.exports.logout_get = (req, res) => {
-  res.cookie('jwt', '', { maxAge: 1 });
-  res.redirect('/');
-}
+};
+logout_get = (req, res) => {
+  res.cookie("jwt", "", { maxAge: 1 });
+  res.redirect("/");
+};
+module.exports = { signup_get, login_get, signup_post, login_post, logout_get };

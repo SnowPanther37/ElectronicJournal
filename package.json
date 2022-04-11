@@ -18,9 +18,12 @@
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.0",
     "cookie-parser": "^1.4.6",
     "dotenv": "^15.0.0",
     "ejs": "^3.1.6",
+    "ejs-lint": "^1.2.1",
     "express": "^4.17.2",
     "jsonwebtoken": "^8.5.1",
     "method-override": "^3.0.0",

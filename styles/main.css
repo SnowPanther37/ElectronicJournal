@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
-
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   padding-top: 80px;
@@ -8,7 +10,8 @@ body {
   font-family: "Montserrat", sans-serif;
   font-size: 20px;
   letter-spacing: 1px;
-  background: linear-gradient(to bottom, #00d2ff, #928dab);
+  background-image: url(../Images/bgImage.svg);
+  background-attachment: fixed;
   color: #fff;
 }
 
@@ -21,7 +24,7 @@ nav {
   top: 0;
   left: 0;
   right: 0;
-  min-height: 60px;
+  min-height: 40px;
   display: flex;
   justify-content: flex-end;
   background-color: rgba(0, 0, 0, 0.7);

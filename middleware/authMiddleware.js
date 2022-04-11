@@ -1,31 +1,29 @@
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
-
+const jwt = require("jsonwebtoken");
+const User = require("../models/user");
 const requireAuth = (req, res, next) => {
   const token = req.cookies.jwt;
-
-  // check json web token exists & is verified
   if (token) {
-    jwt.verify(token, 'voodle', (err, decodedToken) => {
+    jwt.verify(token, process.env.HEADER, async (err, decodedToken) => {
       if (err) {
-        console.log(err.message);
-        res.redirect('/login');
+        console.log(err);
+        res.redirect("/login");
       } else {
-        console.log(decodedToken);
+        let user = await User.findById(decodedToken.id);
+        req.user = user;
+        res.locals.user = user;
         next();
       }
     });
   } else {
-    res.redirect('/login');
+    res.redirect("/login");
   }
 };
-
-// check current user
 const checkUser = (req, res, next) => {
   const token = req.cookies.jwt;
   if (token) {
-    jwt.verify(token, 'voodle', async (err, decodedToken) => {
+    jwt.verify(token, process.env.HEADER, async (err, decodedToken) => {
       if (err) {
+        console.log(err);
         res.locals.user = null;
         next();
       } else {
@@ -39,6 +37,4 @@ const checkUser = (req, res, next) => {
     next();
   }
 };
-
-
 module.exports = { requireAuth, checkUser };
