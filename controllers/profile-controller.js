@@ -13,7 +13,7 @@ const getProfile = (req, res) => {
 }
 
 const postProfile = async (req, res) => {
-    const { firstName, middleName, lastName, email, address, city, phoneNumber, group, course, isStudent, isPrepod } =
+    const { firstName, middleName, lastName, email, address, city, phoneNumber, group, course } =
     req.body;
   const user = await User.findOne({ email });
   user.firstName = firstName;
@@ -24,8 +24,6 @@ const postProfile = async (req, res) => {
   user.phoneNumber = phoneNumber;
   user.group = group;
   user.course = course;
-  user.isStudent = isStudent;
-  user.isPrepod = isPrepod;
   await user.save();
   res.render(createPath('profile'), { user, states });
 }

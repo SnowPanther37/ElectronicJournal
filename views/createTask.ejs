@@ -23,24 +23,51 @@
   <body>
     <div class="headerContainer">
       <%- include ('./partials/navbar.ejs') %>
-      <div class="container createContainer">
-        <h1 class="text-center taskHeading mb-4">Создание занятия</h1>
+      <div style="padding-top: 350px;" class="container createContainer">
+        <h1 style="padding-bottom: 0px;" class="text-center taskHeading mb-4">Создание занятия</h1>
         <div class="createDiv">
           <form
+            
             class="taskForm"
             method="post"
             action="/create-task"
             autocomplete="off"
           >
             <div class="form-group">
-              <label for="task" class="label">Занятие</label>
+              <label for="task" class="label">Название предмета</label>
               <input
                 type="text"
                 class="form-control inputField"
                 id="task"
                 name="task"
                 required
-                placeholder="Какое занятие?"
+                placeholder="Какое название предмета?"
+              />
+            </div>
+            <div class="form-group">
+              <label for="task" class="label">Тип занятия</label>
+              <select name="typeWork" id="task" required class="form-control" style="width: 20em;">
+              <option value="">Выберите тип занятия</option>
+              <option value="Лекция">Лекция</option>
+              <option value="Практика">Практика</option>
+              <option value="Лабораторное занятие">Лабораторное занятие</option>
+              <option value="Консультация">Консультация</option>
+              <option value="Экзамен">Экзамен</option>
+              <option value="Зачет">Зачет</option>
+              <option value="Курсовой проект">Курсовой проект</option>
+              <option value="Руководство практикой">Руководство практикой</option>
+              <option value="Руководство ВКР">Руководство ВКР</option>
+            </select>
+            </div>
+            <div class="form-group">
+              <label for="task" class="label">Курс</label>
+              <input
+                type="text"
+                class="form-control inputField"
+                id="task"
+                name="course"
+                required
+                placeholder="Выберите курс"
               />
             </div>
             <div class="form-group">
@@ -64,6 +91,27 @@
                 required
                 placeholder="Сколько студентов присутствовало?"
               />
+            </div>
+            <div class="form-group">
+              <label for="task" class="label">Учебная неделя</label>
+              <select name="numberWeek" id="task" required class="form-control" style="width: 20em;">
+              <option value="">Выберите учебную неделю</option>
+              <option value="1">Первая</option>
+              <option value="2">Вторая</option>
+            </select>
+            </div>
+            <div class="form-group">
+              <label for="task" class="label">День недели</label>
+              <select name="dayWeek" id="task" required class="form-control" style="width: 20em;">
+              <option value="">Выберите день недели</option>
+              <option value="Понедельник">Понедельник</option>
+              <option value="Вторник">Вторник</option>
+              <option value="Среда">Среда</option>
+              <option value="Четверг">Четверг</option>
+              <option value="Пятница">Пятница</option>
+              <option value="Суббота">Суббота</option>
+              <option value="Воскресенье">Воскресенье</option>
+            </select>
             </div>
             <div class="form-group">
               <label for="date" class="label">Начало</label>

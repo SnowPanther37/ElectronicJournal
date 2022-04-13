@@ -15,13 +15,32 @@ const getUser = (req, res) => {
 }
 
 
-const getUsers = (req, res) => {
+const getUsers = (req, res, next) => {
     const title = 'Пользователи';
+    var perPage = 7
+    var page = req.params.page || 1
     User
         .find()
+        .skip((perPage * page) - perPage)
+        .limit(perPage)
         .sort({ createdAt: -1 })
-        .then((users) => res.render(createPath('users'), {users, title}))
-        .catch((error) => handleError(res, error));
+        .exec(function(err, users) {
+            User.count().exec(function(err, count) {
+                if (err) return next(err)
+                res.render(createPath('users'), {
+                    users: users,
+                    current: page,
+                    pages: Math.ceil(count/perPage)
+                })
+            })
+        })
+       /*  .then((users) => res.render(createPath('users'), {
+            users: users,
+            current: page,
+            pages: Math.ceil(count/perPage),
+            title
+        }))
+        .catch((error) => handleError(res, error)); */
 }
 
 const getEditUser = (req, res) => {
@@ -51,10 +70,38 @@ const deleteUser = (req, res) => {
         .catch((error) => handleError(res, error));
 }
 
+/* const getAddUser = (req, res) => {
+    const { firstName, middleName, lastName, email, address, city, phoneNumber, group, course, isStudent, isPrepod } = req.body;
+    const cafedra = new Cafedra({ firstName, middleName, lastName, email, address, city, phoneNumber, group, course, isStudent, isPrepod });
+    cafedra
+        .save()
+        .then((result) => res.redirect('/users'))
+        .catch((error) => handleError(res, error));
+} */
+const postUser = async (req, res) => {
+    const { firstName, middleName, lastName, email, address, city, phoneNumber, group, course, isStudent, isPrepod} =
+    req.body;
+  const user = await User.findOne({ email });
+  user.firstName = firstName;
+  user.middleName = middleName;
+  user.lastName = lastName;
+  user.city = city;
+  user.address = address;
+  user.phoneNumber = phoneNumber;
+  user.group = group;
+  user.course = course;
+  user.isPrepod = isPrepod;
+  user.isStudent = isStudent;
+  await user.save();
+  res.render(createPath('user'), { user });
+}
+
 module.exports = {
     getUser,
     getUsers,
     getEditUser,
     editUser,
-    deleteUser
+    deleteUser,
+    // getAddUser,
+    postUser,
 }

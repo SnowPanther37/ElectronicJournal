@@ -25,12 +25,12 @@
         <%- include ('./partials/navbar.ejs') %>
             <div class="container ">
                 <div class="row">
-                    <div class="col-lg-4 col-md-4 profileContainerImage">
+                    <div style="padding-top: 7em;" class="col-lg-4 col-md-4 profileContainerImage">
                         <img src="https://www.kindpng.com/picc/m/78-785827_user-profile-avatar-login-account-male-user-icon.png"
                              class="profileImage mt-4" alt="user" />
                     </div>
-                    <div class="col-lg-8 col-md-8 profileContainerContent">
-                        <form method="post" action="/profile">
+                    <div style="padding-top: 7em;" class="col-lg-8 col-md-8 profileContainerContent">
+                        <form method="post" action="/user">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputFirstName">Имя</label>
@@ -83,16 +83,25 @@
                                 </div>
                             </div>
                             <% } %>
-                            <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="inputStudent">Пользователь студент?</label>
-                                <input type="text" class="form-control"  placeholder="true or false"  id="inputStudent" value="<%=user.isStudent%>" required name="isStudent">
+                            <div class="form-group">
+                            
+                                <label for="inputStudent" class="label">Пользователь студент?</label>
+                                <select name="isStudent" id="task" required class="form-control" style="width: 20em;">
+                                    <option value="<%=user.isStudent%>"><%=user.isStudent%></option>
+                                    <option value="true">true</option>
+                                    <option value="false">false</option>
+                               <!--  <input type="boolean" class="form-control"  placeholder="true or false"  id="inputStudent" value="<%=user.isStudent%>" required name="isStudent"> -->
+                                </select>
                             </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputPrepod">Преподаватель?</label>
-                                <input type="text" class="form-control"  placeholder="true or false"  id="inputPrepod" value="<%=user.isPrepod%>" required name="isPrepod">
-                            </div>
-                            </div>
+                            <div class="form-group">
+                                <label for="inputPrepod" class="label">Преподаватель?</label>
+                                <select name="isPrepod" id="task" required class="form-control" style="width: 20em;">
+                                <option value="<%=user.isPrepod%>"><%=user.isPrepod%></option>
+                                    <option value="true">true</option>
+                                    <option value="false">false</option>
+                               <!--  <input type="boolean" class="form-control"  placeholder="true or false"  id="inputPrepod" value="<%=user.isPrepod%>" required name="isPrepod"> -->
+                            </select>
+                        </div>
                             <button type="submit" class="btn btn-primary mt-3" >Обновить профиль пользователя</button>
                         </form>
                     </div>

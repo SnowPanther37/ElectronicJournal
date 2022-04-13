@@ -11,7 +11,6 @@
   <link rel="stylesheet" href="/css/cafedras.css" />
   <link rel="stylesheet" href="/css/profile.css" />
   <%- include ('./partials/bootstrap.ejs') %>
-  <!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="/js/navbar.js"></script>
@@ -85,126 +84,96 @@
       </div>
     </div>
   </nav>
-  <div class="container">
-    <h1 style="color: white; margin-top: 70px; margin-left: 20px; font-weight: bold; font-size: 2em;letter-spacing: 1px;">Пользователи:</h1>
+  
+  <h1 style="color: white; margin-top: 70px; margin-left: 20px; font-weight: bold; font-size: 2em;letter-spacing: 1px;">Пользователи:</h1>
   <div style="justify-content:baseline; display: flex;">
 <button id="example_2_1" onclick="document.getElementById('example_2').style.display='block'; document.getElementById('example_3').style.display='none'; document.getElementById('example_2_1').style.display='none'; document.getElementById('example_2_2').style.display='block';" style="display:none; border-radius: 10px; margin-left: 20px;">Показать всех</button>
 <button id="example_2_2" onclick=" document.getElementById('example_2').style.display='none'; document.getElementById('example_3').style.display='block'; document.getElementById('example_2_2').style.display='none'; document.getElementById('example_2_1').style.display='block';" style="border-radius: 10px; margin-left: 20px;">Показать студентов</button>
 <button id="example_2_1" onclick="document.getElementById('example_2').style.display='block'; document.getElementById('example_3').style.display='block'; document.getElementById('example_4').style.display='none'; document.getElementById('example_2_1').style.display='none'; document.getElementById('example_2_2').style.display='block';" style="display:none; border-radius: 10px; margin-left: 20px;">Показать всех</button>
 <button id="example_2_2" onclick=" document.getElementById('example_2').style.display='none'; document.getElementById('example_3').style.display='none'; document.getElementById('example_4').style.display='block'; document.getElementById('example_2_2').style.display='none'; document.getElementById('example_2_1').style.display='block';" style="border-radius: 10px; margin-left: 20px;">Показать преподавателей</button>
 </div> 
-    <ul id="example_2">
-      <% if (users) { %>
-        <% users.forEach(({ id, firstName, lastName, isStudent, isAdmin, isPrepod, course, group }) => { %>
-          <li>
-            <article style="border-radius: 10px; margin-top: 15px;margin-left: 15px; margin-right: 15px; margin-bottom: 10px;">
-              <h2>
-                <a href="/users/:page/<%= id %>"><%= firstName %> <%= lastName %></a>
-                <a><% if (isPrepod) { %> Преподаватель <% } %></a>
-                <a><% if (isStudent) { %> Студент <%= course %>/<%= group %><% } %></a>
-                <a style="color: red;"><% if (isAdmin) { %> Администратор <% } %></a>
-                <% if (user.isAdmin) { %>
-                <a style="float:right; margin-right: 60px; margin-top: 15px; font-size: 18px;" href="/edit-user/<%= id %>">РЕДАКТИРОВАТЬ</a>
-                <%if(user.isAdmin){%>
-                  <button class="btn-delete" data-id="<%= id %>">
-                    <i class="fas fa-trash-alt" data-id="<%= id %>"></i>
-                </button>
-                <%}%>
-                <%}%>
-              </h2>
-            </article>
-          </li>
-        <% }) %>
-      <% } %>
-    </ul>
-    <ul id="example_3" style='display: none;' >
-      <% if (users) { %>
-        <% users.forEach(({ id, firstName, lastName, isStudent, course, group }) => { %>
-          <li <% if (isStudent) { %>>
-            <article style="border-radius: 10px; margin-top: 15px;margin-left: 15px; margin-right: 15px; margin-bottom: 10px;">
-              <h2>
-                <a  href="/users/<%= id %>"><%= firstName %> <%= lastName %></a>
-                <a> Студент <%= course %>/<%= group %></a>
-                <a style="float:right; margin-right: 60px; margin-top: 15px; font-size: 18px;"<% if (user.isAdmin) { %>href="/edit-user/<%= id %>">РЕДАКТИРОВАТЬ<%}%></a>
-                <%if(user.isAdmin){%>
-                  <button class="btn-delete" data-id="<%= id %>">
-                    <i class="fas fa-trash-alt" data-id="<%= id %>"></i>
-                </button>
-                <%}%>
-                
-              </h2>
-            </article>
-          </li <% } %>>
-        <% }) %>
-      <% } %>
-    </ul>
-    <ul id="example_4" style='display: none;' >
+<ul id="example_2">
+    <% if (users) { %>
+      <% users.forEach(({ id, firstName, lastName, isStudent, isAdmin, isPrepod, course, group }) => { %>
+        <li>
+          <article style="border-radius: 10px; margin-top: 15px;margin-left: 15px; margin-right: 15px; margin-bottom: 10px;">
+            <h2>
+              <a href="/users/<%= id %>"><%= firstName %> <%= lastName %></a>
+              <a><% if (isPrepod) { %> Преподаватель <% } %></a>
+              <a><% if (isStudent) { %> Студент <%= course %>/<%= group %><% } %></a>
+              <a style="color: red;"><% if (isAdmin) { %> Администратор <% } %></a>
+              <a style="float:right; margin-right: 60px; margin-top: 15px; font-size: 18px;"<% if (user.isAdmin) { %>href="/edit-user/<%= id %>">РЕДАКТИРОВАТЬ<%}%></a>
+              <%if(user.isAdmin){%>
+                <button class="btn-delete" data-id="<%= id %>">
+                  <i class="fas fa-trash-alt" data-id="<%= id %>"></i>
+              </button>
+              <%}%>
+            </h2>
+          </article>
+        </li>
+      <% }) %>
+    <% } %>
+  </ul>
+  <ul id="example_3" style='display: none;' >
      <% if (users) { %>
-       <% users.forEach(({ id, firstName, lastName, isPrepod,  }) => { %>
-         <li <% if (isPrepod) { %>>
+       <% users.forEach(({ id, firstName, lastName, isStudent, course, group }) => { %>
+         <li <% if (isStudent) { %>>
            <article style="border-radius: 10px; margin-top: 15px;margin-left: 15px; margin-right: 15px; margin-bottom: 10px;">
              <h2>
-               <a  href="/users/<%= id %>"><%= firstName %> <%= lastName %></a><a> Преподаватель</a>
+               <a  href="/users/<%= id %>"><%= firstName %> <%= lastName %></a>
+               <a> Студент <%= course %>/<%= group %></a>
                <a style="float:right; margin-right: 60px; margin-top: 15px; font-size: 18px;"<% if (user.isAdmin) { %>href="/edit-user/<%= id %>">РЕДАКТИРОВАТЬ<%}%></a>
                <%if(user.isAdmin){%>
                  <button class="btn-delete" data-id="<%= id %>">
                    <i class="fas fa-trash-alt" data-id="<%= id %>"></i>
                </button>
                <%}%>
+               
              </h2>
            </article>
          </li <% } %>>
        <% }) %>
      <% } %>
    </ul>
-        <% if (pages > 0) { %>
-            <ul class="pagination justify-content-center">
-                <% if (current == 1) { %>
-                    <li class="page-item disabled"><a class="page-link" tabindex="-1">Первая</a></li>
-                <% } else { %>
-                    <li  class="page-item"><a class="page-link" href="/users/1">К первой</a></li>
-                <% } %>
-                <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
-                <% if (i !== 1) { %>
-                    <li class="page-item disabled"><a class="page-link">...</a></li>
-                <% } %>
-                <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
-                    <% if (i == current) { %>
-                        <li class="page-item active"><a class="page-link"><%= i %></a></li>
-                    <% } else { %>
-                        <li><a class="page-link" href="/users/<%= i %>"><%= i %></a></li>
-                    <% } %>
-                    <% if (i == Number(current) + 4 && i < pages) { %>
-                        <li class="page-item disabled"><a class="page-link">...</a></li>
-                    <% } %>
-                <% } %>
-                <% if (current == pages) { %>
-                    <li class="page-item disabled"><a class="page-link">Последняя</a></li>
-                <% } else { %>
-                    <li class="page-item"><a class="page-link" href="/users/<%= pages %>">К последней</a></li>
-                <% } %>
-            </ul>
-        <% } %>
-</div>
-<script>
-  document.addEventListener('click', (e) => {
-    const id = e.target?.dataset?.id || null;
-    if (id) {
-      fetch(`/users/${id}`, {
-        method: 'DELETE', 
-      }).then(() => {
-        window.location.reload();
-      });
+   <ul id="example_4" style='display: none;' >
+    <% if (users) { %>
+      <% users.forEach(({ id, firstName, lastName, isPrepod,  }) => { %>
+        <li <% if (isPrepod) { %>>
+          <article style="border-radius: 10px; margin-top: 15px;margin-left: 15px; margin-right: 15px; margin-bottom: 10px;">
+            <h2>
+              <a  href="/users/<%= id %>"><%= firstName %> <%= lastName %></a><a> Преподаватель</a>
+              <a style="float:right; margin-right: 60px; margin-top: 15px; font-size: 18px;"<% if (user.isAdmin) { %>href="/edit-user/<%= id %>">РЕДАКТИРОВАТЬ<%}%></a>
+              <%if(user.isAdmin){%>
+                <button class="btn-delete" data-id="<%= id %>">
+                  <i class="fas fa-trash-alt" data-id="<%= id %>"></i>
+              </button>
+              <%}%>
+              
+            </h2>
+          </article>
+        </li <% } %>>
+      <% }) %>
+    <% } %>
+  </ul>
+  <script>
+    document.addEventListener('click', (e) => {
+      const id = e.target?.dataset?.id || null;
+      if (id) {
+        fetch(`/users/${id}`, {
+          method: 'DELETE', 
+        }).then(() => {
+          window.location.reload();
+        });
+      }
+    });
+    $(document).ready(function () {
+    var size = 90,
+        newsContent = $('.trim'),
+        newsText = newsContent.text().trim(); // ◀
+    if(newsText.length > size) {
+      newsContent.text(newsText.slice(0, size) + ' ...');
     }
   });
-  $(document).ready(function () {
-  var size = 90,
-      newsContent = $('.trim'),
-      newsText = newsContent.text().trim(); // ◀
-  if(newsText.length > size) {
-    newsContent.text(newsText.slice(0, size) + ' ...');
-  }
-});
-</script>
+  </script>
 </body>
 </html>

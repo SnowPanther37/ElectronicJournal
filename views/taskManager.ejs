@@ -29,8 +29,12 @@
             <thead  >
               <tr>
                 <th  class="tableTitle">Занятие</th>
+                <th  class="tableTitle">Тип занятия</th>
+                <th  class="tableTitle">Курс</th>
                 <th  class="tableTitle">Группа</th>
                 <th  class="tableTitle">Студенты</th>
+                <th  class="tableTitle">Учебная неделя</th>
+                <th  class="tableTitle">День недели</th>
                 <th  class="tableTitle">Начало занятия</th>
                 <th  class="tableTitle">Конец занятия</th>
                 <th  class="tableTitle">Статус</th>
@@ -46,8 +50,12 @@
                   <%tasks.map((task)=>{%>
                     <tr>
                       <td><%=task.task%></td>
+                      <td><%=task.typeWork%></td>
+                      <td><%=task.course%></td>
                       <td><%=task.group%></td>
                       <td><%=task.countStudents%></td>
+                      <td><%=task.numberWeek%></td>
+                      <td><%=task.dayWeek%></td>
                       <td><%=task.startDate%></td>
                       <td><%=task.endDate%></td>
                       <td ><div class="status "><%=task.completed%></div></td>
@@ -55,7 +63,8 @@
                         <div class="dropdown">
                             <i class="fa fa-ellipsis-h fa-2x dropdownIcon" aria-hidden="true" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="/task-manager/update/<%=task.id%>" >Отметить</a>
+                            <a class="dropdown-item" href="/task-manager/update/<%=task.id%>" >Проведено</a>
+                            <a class="dropdown-item" href="/task-manager/update2/<%=task.id%>" >Не завершено</a>
                             <a class="dropdown-item" href="/task-manager/delete/<%=task.id%>">Удалить</a>
                           </div>
                         </div>
@@ -72,8 +81,11 @@
   if(status[i].textContent==="Проведено"){
     status[i].style.backgroundColor="green";
   }
-  else{
+  else if(status[i].textContent==="Не завершено"){
     status[i].style.backgroundColor="red";
+  }
+  else{
+    status[i].style.backgroundColor="orange";
   }
 }
 </script>

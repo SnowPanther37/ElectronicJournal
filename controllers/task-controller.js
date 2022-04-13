@@ -43,8 +43,22 @@ const updateTask = async (req, res) => {
     res.render(createPath('taskManager'), { tasks });
 }
 
+const updateTask2 = async (req, res) => {
+  const { id } = req.user;
+  var currentUser = await User.findById(id);
+  var tasks = currentUser.tasks;
+  var taskId = req.params.id;
+  tasks.map((task) => {
+    if (task.id === taskId) {
+      task.completed = "Не завершено";
+    }
+  });
+  await currentUser.save();
+  res.render(createPath('taskManager'), { tasks });
+}
+
 const postTask = async (req, res) => {
-    const { task, group, countStudents, startDate, endDate } = req.body;
+    const { task, group, countStudents, startDate, endDate, typeWork, course, numberWeek, dayWeek } = req.body;
     const { id } = req.user;
     const currentUser = await User.findById(id);
     currentUser.tasks.push({
@@ -53,64 +67,21 @@ const postTask = async (req, res) => {
       countStudents: countStudents,
       startDate:startDate,
       endDate: endDate,
-      completed: "В процессе",
+      dayWeek: dayWeek,
+      typeWork: typeWork,
+      course: course,
+      numberWeek: numberWeek,
+      completed: "Запланировано",
     });
     await currentUser.save();
     res.redirect("/task-manager");
 }
-/* app.get("/task-manager", requireAuth, async (req, res) => {
-    const { id } = req.user;
-    var currentUser = await User.findById(id);
-    var tasks = currentUser.tasks;
-    res.render("./partials/taskManager", { tasks });
-  }); */
-
- /*  app.get("/create-task", requireAuth, (req, res) => {
-    res.render("./partials/createTask");
-  }); */
-
-/*   app.get("/task-manager/delete/:id", requireAuth, async (req, res) => {
-    const { id } = req.user;
-    const currentUser = await User.findById(id);
-    var tasks = currentUser.tasks;
-    var taskId = req.params.id;
-    const index = tasks.findIndex((task) => task.id === taskId);
-    tasks.splice(index, 1);
-    await currentUser.save();
-    res.redirect("/task-manager");
-  }); */
-
- /*  app.get("/task-manager/update/:id", requireAuth, async (req, res) => {
-    const { id } = req.user;
-    var currentUser = await User.findById(id);
-    var tasks = currentUser.tasks;
-    var taskId = req.params.id;
-    tasks.map((task) => {
-      if (task.id === taskId) {
-        task.completed = "Completed";
-      }
-    });
-    await currentUser.save();
-    res.render("./partials/taskManager", { tasks });
-  }); */
-
-/*   app.post("/create-task", requireAuth, async (req, res) => {
-    const { task, endDate } = req.body;
-    const { id } = req.user;
-    const currentUser = await User.findById(id);
-    currentUser.tasks.push({
-      task: task,
-      endDate: endDate,
-      completed: "In-Complete",
-    });
-    await currentUser.save();
-    res.redirect("/task-manager");
-  }); */
 
   module.exports = {
     getTask,
     createTask,
     deleteTask,
     updateTask,
+    updateTask2,
     postTask
 }

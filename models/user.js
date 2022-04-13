@@ -42,16 +42,27 @@ const userSchema = new mongoose.Schema({
   },
   isStudent: {
     type: Boolean,
+   default: 'false',
   },
   isPrepod: {
     type: Boolean,
+    default: 'false',
   },
   isAdmin: {
     type: Boolean,
+    default: 'false',
   },
   tasks: [
     {
       task: {
+        type: String,
+        required: true,
+      },
+      typeWork: {
+        type: String,
+        required: true,
+      },
+      course: {
         type: String,
         required: true,
       },
@@ -61,6 +72,14 @@ const userSchema = new mongoose.Schema({
       },
       countStudents: {
         type: Number,
+        required: true,
+      },
+      numberWeek: {
+        type: String,
+        required: true,
+      },
+      dayWeek: {
+        type: String,
         required: true,
       },
       startDate:{
