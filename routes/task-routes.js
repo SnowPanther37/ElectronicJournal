@@ -5,7 +5,8 @@ const {
     deleteTask,
     updateTask,
     updateTask2,
-    postTask
+    postTask,
+    excel
 } = require('../controllers/task-controller');
 
 const { requireAuth } = require('../middleware/authMiddleware');
@@ -18,6 +19,7 @@ router.get('/task-manager/delete/:id', requireAuth, deleteTask);
 router.get('/task-manager/update/:id', requireAuth, updateTask);
 router.get('/task-manager/update2/:id', requireAuth, updateTask2);
 router.post('/create-task', requireAuth, postTask);
+router.get('/task-manager/download', requireAuth, excel);
 
 
 

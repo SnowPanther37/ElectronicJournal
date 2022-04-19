@@ -1,5 +1,7 @@
 const User = require("../models/user");
 const createPath = require('../helpers/create-path');
+var mongoXlsx = require('mongo-xlsx');
+var XLSX = require('xlsx');
 
 const handleError = (res, error) => {
     console.log(error);
@@ -12,6 +14,39 @@ const getTask = async (req, res) => {
     var currentUser = await User.findById(id);
     var tasks = currentUser.tasks;
     res.render(createPath('taskManager'), { tasks, title });
+}
+
+/* const excel = async (req, res) => {
+    const {id} = req.user;
+    var currentUser = await User.findById(id);
+    var tasks = currentUser.tasks;
+    console.log(tasks);
+    var model = mongoXlsx.buildDynamicModel(tasks);
+    console.log(model);
+    var options =  {
+      save: true,
+      sheetName: [],
+      fileName: "Schedule Report-" + new Date().getTime() + ".xlsx",
+      defaultSheetName: "Schedule Report"
+    }
+    mongoXlsx.mongoData2Xlsx(tasks, model, options, function(err, tasks) {
+      console.log('File saved at:', tasks.fullPath); 
+      res.download(tasks.fullPath);
+    });
+} */
+
+const excel = async (req, res) => {
+  const {id} = req.user;
+  var currentUser = await User.findById(id);
+  var tasks = currentUser.tasks;
+  var wb = XLSX.utils.book_new();
+  var temp = JSON.stringify(tasks);
+  temp = JSON.parse(temp);
+  var ws = XLSX.utils.json_to_sheet(temp);
+  var down = 'exportXLSX/exportdata.xlsx';
+  XLSX.utils.book_append_sheet(wb, ws, "sheet1");
+  XLSX.writeFile(wb, down);
+  res.download(down);
 }
 
 const createTask = (req, res) => {
@@ -83,5 +118,6 @@ const postTask = async (req, res) => {
     deleteTask,
     updateTask,
     updateTask2,
-    postTask
+    postTask,
+    excel
 }

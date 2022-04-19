@@ -21,9 +21,9 @@ const getUsers = (req, res, next) => {
     var page = req.params.page || 1
     User
         .find()
+        .sort({ firstName: 1 })
         .skip((perPage * page) - perPage)
         .limit(perPage)
-        .sort({ createdAt: -1 })
         .exec(function(err, users) {
             User.count().exec(function(err, count) {
                 if (err) return next(err)

@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Занятия</title>
     <link rel="stylesheet" href="/css/style.css" />
+    <script src="jquery-2.1.4.js"></script>
+    <script lang="javascript" src="dist/xlsx.full.min.js"></script>
+    <!-- use the latest version -->
+<script lang="javascript" src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+<script lang="javascript" src="FileSaver.min.js"></script>
     <link rel="stylesheet" href="/css/taskManager.css" />
     <%- include ('./partials/bootstrap.ejs') %>
     <style>
@@ -25,7 +30,8 @@
         <%- include ('./partials/navbar.ejs') %>
         <div class="container tableContainer">
             <h1 class="text-center mb-5 taskHeading">Менеджер занятий</h1>
-        <table class="table table-striped">
+       <!--      <button id="button-a">Create Excel</button> -->
+        <table id="mytable" class="table table-striped">
             <thead  >
               <tr>
                 <th  class="tableTitle">Занятие</th>
@@ -46,6 +52,10 @@
                     <td colspan="4"  class="createText" >
                       <a href="/create-task">  <i class="fa fa-plus-circle" aria-hidden="true"></i></i> Создать занятие</a>
                     </td>
+                    <tr class="create">
+                      <td colspan="4"  class="createText" >
+                        <a href="/task-manager/download">  <i class="fa fa-plus-circle" aria-hidden="true"></i></i>Скачать отчет по занятиям</a>
+                      </td>
                   </tr>
                   <%tasks.map((task)=>{%>
                     <tr>
@@ -88,6 +98,21 @@
     status[i].style.backgroundColor="orange";
   }
 }
+
+/*     var wb = XLSX.utlis.table_to_book(document.getElementById('mytable'), {sheet: "Sheet JS"});
+    var wbout = XLSX.write(wb, {bookType: 'xlsx', bookSST:true, type: 'binary'});
+        function s2ab(s) {
+          var buf = new ArrayBuffer(s.length);
+          var view = new Uint8Array(buf);
+          console.log("ke");
+            for (var i=0; i<s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+            return buf;
+        }
+        $("#button-a").click(function(){
+        saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), 'test.xlsx');
+        });
+
+         */
 </script>
 </body>
 </html>

@@ -55,6 +55,7 @@ const userSchema = new mongoose.Schema({
   tasks: [
     {
       task: {
+        displayName: 'анятие',
         type: String,
         required: true,
       },

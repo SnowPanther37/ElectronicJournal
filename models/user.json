@@ -1,0 +1,52 @@
+[
+    {
+      "displayName": "Занятие",
+      "access": "_id",
+      "type": "String"
+    },
+    {
+      "displayName": "Main Index",
+      "access": "index",
+      "type": "number"
+    },
+    {
+      "displayName": "My GUID",
+      "access": "guid",
+      "type": "string"
+    },
+    {
+      "displayName": "Is User Active",
+      "access": "isActive",
+      "type": "boolean"
+    },
+    {
+      "displayName": "Balance",
+      "access": "balance",
+      "type": "string"
+    },
+    {
+      "displayName": "picture",
+      "access": "picture",
+      "type": "string"
+    },
+    {
+      "displayName": "age",
+      "access": "age",
+      "type": "number"
+    },
+    {
+      "displayName": "eyeColor",
+      "access": "eyeColor",
+      "type": "string"
+    },
+    {
+      "displayName": "First Name",
+      "access": "name[first]",
+      "type": "string"
+    },
+    {
+      "displayName": "Last Name",
+      "access": "name[last]",
+      "type": "string"
+    }
+  ]
